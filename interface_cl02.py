@@ -17,6 +17,7 @@ import tkinter as tk
 from tkinter import filedialog, messagebox, ttk
 
 import matplotlib
+import numpy as np
 
 matplotlib.use("TkAgg")
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk  # noqa: E402
@@ -55,6 +56,66 @@ def dossier_programme():
     if getattr(sys, "frozen", False):
         return getattr(sys, "_MEIPASS", os.path.dirname(sys.executable))
     return os.path.dirname(os.path.abspath(__file__))
+
+
+COPIES_CROSSDOCK = ("o1", "o2", "o3", "o4")
+
+
+def _distance_schema(data, a, b):
+    """Temps de trajet entre deux sommets (o1..o4 = crossdock). Pas d'arc collecte–livraison : triangle via le CD."""
+    if a == b:
+        return 0.0
+    cd = set(COPIES_CROSSDOCK) | {"CD"}
+    if a in cd and b in cd:
+        return 0.0
+    t_cd = data["t_cd"]
+    if a in cd:
+        return float(t_cd[b])
+    if b in cd:
+        return float(t_cd[a])
+    t = data["t"]
+    if (a, b) in t:
+        return float(t[(a, b)])
+    if (b, a) in t:
+        return float(t[(b, a)])
+    return float(t_cd[a]) + float(t_cd[b])
+
+
+def positions_schema(data):
+    """Coordonnées 2D par MDS classique à partir de data['t'] et data['t_cd'].
+    Les quatre copies o1..o4 du crossdock sont regroupées en un seul point « CD ».
+    Renvoie None si la matrice de distances est absente."""
+    if not data.get("t") or not data.get("t_cd"):
+        return None
+    n = data["n"]
+    sommets = list(COPIES_CROSSDOCK) + list(range(1, 2 * n + 1))
+    m = len(sommets)
+    D = np.zeros((m, m), dtype=float)
+    for i, a in enumerate(sommets):
+        for j, b in enumerate(sommets):
+            D[i, j] = _distance_schema(data, a, b)
+    D = 0.5 * (D + D.T)
+    D2 = D ** 2
+    J = np.eye(m) - np.ones((m, m)) / m
+    B = -0.5 * J @ D2 @ J
+    vals, vecs = np.linalg.eigh(B)
+    ordre = np.argsort(vals)[::-1]
+    vals, vecs = vals[ordre], vecs[:, ordre]
+    xy = np.zeros((m, 2), dtype=float)
+    k = 0
+    for d in range(len(vals)):
+        if k >= 2:
+            break
+        if vals[d] > 1e-12:
+            xy[:, k] = vecs[:, d] * np.sqrt(vals[d])
+            k += 1
+    cd_xy = tuple(float(x) for x in xy[:len(COPIES_CROSSDOCK)].mean(axis=0))
+    coords = {"CD": cd_xy}
+    for nom in COPIES_CROSSDOCK:
+        coords[nom] = cd_xy
+    for i, s in enumerate(sommets[len(COPIES_CROSSDOCK):], start=len(COPIES_CROSSDOCK)):
+        coords[s] = (float(xy[i, 0]), float(xy[i, 1]))
+    return coords
 
 
 def libelle_statut(res):
@@ -236,6 +297,14 @@ class Application(tk.Tk):
         self._init_resume()
         self._init_tournees()
         self.fig_h, self.cv_h = self._canevas(self.t_horaires)
+        barre_carte = ttk.Frame(self.t_carte)
+        barre_carte.pack(side="top", fill="x", padx=8, pady=(4, 0))
+        ttk.Label(barre_carte, text="Véhicule affiché :").pack(side="left")
+        self.var_veh_carte = tk.StringVar(value="Tous")
+        self.cb_veh_carte = ttk.Combobox(barre_carte, textvariable=self.var_veh_carte,
+                                         state="readonly", width=12, values=["Tous"])
+        self.cb_veh_carte.pack(side="left", padx=4)
+        self.cb_veh_carte.bind("<<ComboboxSelected>>", self._redessiner_carte)
         self.fig_c, self.cv_c = self._canevas(self.t_carte, barre_outils=True)
         self._init_energie()
         self._init_comparaison()
@@ -333,7 +402,7 @@ class Application(tk.Tk):
     # ------------------------------------------------------------------ instance
     def _poser_instance(self, data):
         self.data = data
-        coords = "oui" if data.get("coords") else "non (distances seulement : pas de carte)"
+        coords = "oui" if data.get("coords") else "non (schéma à partir des distances)"
         self.lbl_instance.configure(
             text=f"{data.get('nom', 'Instance')}\n{data['n']} demandes · capacité {data['Q']} · durée de route {data['T']} s · "
                  f"ride time max {data['L']} s\nCoordonnées : {coords}")
@@ -602,6 +671,8 @@ class Application(tk.Tk):
         self.onglets.tab(self.t_energie, state="disabled")
         self.bt_json.configure(state="disabled")
         self.bt_csv.configure(state="disabled")
+        self.var_veh_carte.set("Tous")
+        self.cb_veh_carte.configure(values=["Tous"])
 
     @staticmethod
     def _dessiner_vide(fig, cv, message):
@@ -711,44 +782,68 @@ class Application(tk.Tk):
         fig.subplots_adjust(left=0.1, right=0.97, top=0.92, bottom=0.25)
         self.cv_h.draw_idle()
 
+    def _redessiner_carte(self, _evt=None):
+        if self.res_affiche and self.payload and self.res_affiche.get("solution") is not None:
+            self._dessiner_carte(self.res_affiche, self.payload["data"])
+
     # ---- Carte
     def _dessiner_carte(self, res, data):
         fig = self.fig_c
         fig.clear()
+        schema = False
         coords = data.get("coords")
         if not coords:
-            fig.text(0.5, 0.5, "Pas de coordonnées pour ce réseau (réseau de l'article : distances seulement).\n"
-                               "Voir les onglets Tournées et Horaires.", ha="center", va="center", color="#667085", fontsize=11)
-            self.cv_c.draw_idle()
-            return
+            if not data.get("t") or not data.get("t_cd"):
+                fig.text(0.5, 0.5, "Pas de coordonnées pour ce réseau (réseau de l'article : distances seulement).\n"
+                                   "Voir les onglets Tournées et Horaires.", ha="center", va="center", color="#667085", fontsize=11)
+                self.cv_c.draw_idle()
+                return
+            coords = positions_schema(data)
+            schema = True
         n = data["n"]
+        vehicules = ["Tous"] + [f"Véhicule {v['k']}" for v in res["details"]]
+        actuel = self.var_veh_carte.get()
+        self.cb_veh_carte.configure(values=vehicules)
+        if actuel not in vehicules:
+            self.var_veh_carte.set("Tous")
+            actuel = "Tous"
         ax = fig.add_subplot(111)
         for k, phase, labels in api.chemins(data, res["solution"]):
+            if actuel != "Tous" and actuel != f"Véhicule {k}":
+                continue
             pts = [coords[l] for l in labels]
             for (x1, y1), (x2, y2) in zip(pts[:-1], pts[1:]):
                 ax.annotate("", xy=(x2, y2), xytext=(x1, y1),
                             arrowprops=dict(arrowstyle="->", color=couleur(k), lw=1.4,
-                                            ls="-" if phase == "collecte" else "--", shrinkA=5, shrinkB=5))
+                                            ls="-" if phase == "collecte" else "--", shrinkA=6, shrinkB=6))
         transf = {t["requete"] for t in res["transferts"]}
         for i in range(1, n + 1):
             x, y = coords[i]
             ax.plot(x, y, "o", color=COULEUR_TRANSFERT if i in transf else "#101828", markersize=7, zorder=3)
-            ax.annotate(str(i), (x, y), textcoords="offset points", xytext=(5, 5), fontsize=8)
+            ax.annotate(f"C{i}", (x, y), textcoords="offset points",
+                        xytext=(7, 4 + 8 * ((i - 1) % 4 - 1)), fontsize=8)
             x, y = coords[i + n]
             ax.plot(x, y, "s", color=COULEUR_TRANSFERT if i in transf else "#101828", markersize=7, zorder=3)
-            ax.annotate(str(i + n), (x, y), textcoords="offset points", xytext=(5, 5), fontsize=8)
+            ax.annotate(f"L{i}", (x, y), textcoords="offset points",
+                        xytext=(7, -10 - 6 * ((i - 1) % 3)), fontsize=8)
         ax.plot(*coords["CD"], "*", color="#b42318", markersize=17, zorder=4)
+        ax.annotate("CD", coords["CD"], textcoords="offset points", xytext=(8, 8), fontsize=9,
+                    color="#b42318", fontweight="bold")
         ax.set_aspect("equal", adjustable="datalim")
+        ax.margins(0.14)
         ax.grid(alpha=0.25)
         ax.set_title("Carte : collecte en trait plein, livraison en pointillé", fontsize=11)
         manches = [Line2D([], [], color=couleur(v["k"]), lw=2, label=f"Véhicule {v['k']}") for v in res["details"]]
-        manches += [Line2D([], [], marker="o", color="#101828", ls="", label="collecte (1 à n)"),
-                    Line2D([], [], marker="s", color="#101828", ls="", label="livraison (n+1 à 2n)"),
+        manches += [Line2D([], [], marker="o", color="#101828", ls="", label="collecte (C1 à Cn)"),
+                    Line2D([], [], marker="s", color="#101828", ls="", label="livraison (L1 à Ln)"),
                     Line2D([], [], marker="*", color="#b42318", ls="", markersize=12, label="crossdock")]
         if transf:
             manches.append(Line2D([], [], marker="o", color=COULEUR_TRANSFERT, ls="", label="demande transférée"))
         ax.legend(handles=manches, loc="center left", bbox_to_anchor=(1.01, 0.5), fontsize=8, frameon=False)
-        fig.subplots_adjust(left=0.06, right=0.80, top=0.93, bottom=0.07)
+        fig.subplots_adjust(left=0.06, right=0.78, top=0.92, bottom=0.12 if schema else 0.08)
+        if schema:
+            fig.text(0.40, 0.02, "Schéma calculé à partir des distances (positions approximatives, hors échelle)",
+                     ha="center", va="bottom", color="#667085", fontsize=8)
         self.cv_c.draw_idle()
 
     # ---- Énergie
