@@ -1,0 +1,222 @@
+[
+ {
+  "n": 1,
+  "K": 1,
+  "alns_cost": 367.57,
+  "alns_time": 0.0,
+  "exact_ub": 367.5673764476884,
+  "exact_time": 0.7,
+  "exact_limit": 60,
+  "exact_status": "OPTIMAL",
+  "alns_vs_exact_pct": 0.0007137609264889838
+ },
+ {
+  "n": 2,
+  "K": 2,
+  "alns_cost": 1011.19,
+  "alns_time": 0.0,
+  "exact_ub": 1011.1947210716663,
+  "exact_time": 0.0,
+  "exact_limit": 60,
+  "exact_status": "OPTIMAL",
+  "alns_vs_exact_pct": -0.0004668805688843154
+ },
+ {
+  "n": 3,
+  "K": 2,
+  "alns_cost": 995.75,
+  "alns_time": 0.1,
+  "exact_ub": 995.7504645811616,
+  "exact_time": 0.0,
+  "exact_limit": 60,
+  "exact_status": "OPTIMAL",
+  "alns_vs_exact_pct": -4.665638411911367e-05
+ },
+ {
+  "n": 4,
+  "K": 3,
+  "alns_cost": 1211.96,
+  "alns_time": 0.1,
+  "exact_ub": 1211.9566987007076,
+  "exact_time": 0.3,
+  "exact_limit": 60,
+  "exact_status": "OPTIMAL",
+  "alns_vs_exact_pct": 0.00027239416193068985
+ },
+ {
+  "n": 5,
+  "K": 3,
+  "alns_cost": 1594.08,
+  "alns_time": 0.1,
+  "exact_ub": 1594.0813816628038,
+  "exact_time": 0.3,
+  "exact_limit": 60,
+  "exact_status": "OPTIMAL",
+  "alns_vs_exact_pct": -8.667454621482285e-05
+ },
+ {
+  "n": 6,
+  "K": 4,
+  "alns_cost": 1941.87,
+  "alns_time": 0.4,
+  "exact_ub": 1941.8702102416987,
+  "exact_time": 4.3,
+  "exact_limit": 60,
+  "exact_status": "OPTIMAL",
+  "alns_vs_exact_pct": -1.0826763689705984e-05
+ },
+ {
+  "n": 7,
+  "K": 6,
+  "alns_cost": 2680.77,
+  "alns_time": 0.8,
+  "exact_ub": 2680.767722356045,
+  "exact_time": 0.3,
+  "exact_limit": 60,
+  "exact_status": "OPTIMAL",
+  "alns_vs_exact_pct": 8.496237611508054e-05
+ },
+ {
+  "n": 8,
+  "K": 6,
+  "alns_cost": 3170.28,
+  "alns_time": 1.2,
+  "exact_ub": 3170.2825945285226,
+  "exact_time": 60.1,
+  "exact_limit": 60,
+  "exact_status": "FEASIBLE",
+  "alns_vs_exact_pct": -8.183902996219589e-05
+ },
+ {
+  "n": 9,
+  "K": 6,
+  "alns_cost": 3164.95,
+  "alns_time": 1.3,
+  "exact_ub": 2964.901098708448,
+  "exact_time": 2.7,
+  "exact_limit": 60,
+  "exact_status": "OPTIMAL",
+  "alns_vs_exact_pct": 6.747236910489052
+ },
+ {
+  "n": 10,
+  "K": 7,
+  "alns_cost": 3540.33,
+  "alns_time": 4.2,
+  "exact_ub": 3393.2851749428582,
+  "exact_time": 90.2,
+  "exact_limit": 90,
+  "exact_status": "FEASIBLE",
+  "alns_vs_exact_pct": 4.333406049776464
+ },
+ {
+  "n": 11,
+  "K": 6,
+  "alns_cost": 3243.72,
+  "alns_time": 2.6,
+  "exact_ub": 3175.478370616038,
+  "exact_time": 90.2,
+  "exact_limit": 90,
+  "exact_status": "FEASIBLE",
+  "alns_vs_exact_pct": 2.14901886957974
+ },
+ {
+  "n": 12,
+  "K": 8,
+  "alns_cost": 3814.08,
+  "alns_time": 4.4,
+  "exact_ub": 3792.7514085069533,
+  "exact_time": 17.8,
+  "exact_limit": 90,
+  "exact_status": "OPTIMAL",
+  "alns_vs_exact_pct": 0.5623514223792156
+ },
+ {
+  "n": 13,
+  "K": 8,
+  "alns_cost": 4083.31,
+  "alns_time": 5.2,
+  "exact_ub": 4074.569763310635,
+  "exact_time": 90.3,
+  "exact_limit": 90,
+  "exact_status": "FEASIBLE",
+  "alns_vs_exact_pct": 0.21450698348733752
+ },
+ {
+  "n": 14,
+  "K": 9,
+  "alns_cost": 4269.73,
+  "alns_time": 6.6,
+  "exact_ub": null,
+  "exact_time": 90.4,
+  "exact_limit": 90,
+  "exact_status": "AUCUNE(6)",
+  "alns_vs_exact_pct": null
+ },
+ {
+  "n": 15,
+  "K": 9,
+  "alns_cost": 4313.53,
+  "alns_time": 8.0,
+  "exact_ub": 4384.27454184394,
+  "exact_time": 90.4,
+  "exact_limit": 90,
+  "exact_status": "FEASIBLE",
+  "alns_vs_exact_pct": -1.6135974416918335
+ },
+ {
+  "n": 16,
+  "K": 9,
+  "alns_cost": 4323.38,
+  "alns_time": 7.7,
+  "exact_ub": null,
+  "exact_time": 90.5,
+  "exact_limit": 90,
+  "exact_status": "AUCUNE(6)",
+  "alns_vs_exact_pct": null
+ },
+ {
+  "n": 17,
+  "K": 10,
+  "alns_cost": 4645.07,
+  "alns_time": 9.8,
+  "exact_ub": null,
+  "exact_time": 90.6,
+  "exact_limit": 90,
+  "exact_status": "AUCUNE(6)",
+  "alns_vs_exact_pct": null
+ },
+ {
+  "n": 18,
+  "K": 12,
+  "alns_cost": 5413.84,
+  "alns_time": 13.3,
+  "exact_ub": null,
+  "exact_time": 90.8,
+  "exact_limit": 90,
+  "exact_status": "AUCUNE(6)",
+  "alns_vs_exact_pct": null
+ },
+ {
+  "n": 19,
+  "K": 12,
+  "alns_cost": 5665.06,
+  "alns_time": 19.0,
+  "exact_ub": null,
+  "exact_time": 90.9,
+  "exact_limit": 90,
+  "exact_status": "AUCUNE(6)",
+  "alns_vs_exact_pct": null
+ },
+ {
+  "n": 20,
+  "K": 12,
+  "alns_cost": 5515.08,
+  "alns_time": 19.5,
+  "exact_ub": null,
+  "exact_time": 90.9,
+  "exact_limit": 90,
+  "exact_status": "AUCUNE(6)",
+  "alns_vs_exact_pct": null
+ }
+]

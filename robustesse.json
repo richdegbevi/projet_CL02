@@ -1,0 +1,362 @@
+{
+ "A": [
+  {
+   "n": 10,
+   "K": 7,
+   "min": 3540.33,
+   "moyenne": 3540.33,
+   "max": 3540.33,
+   "ecart_max_min_pct": 0.0,
+   "temps_moyen_s": 4.3
+  },
+  {
+   "n": 15,
+   "K": 9,
+   "min": 4313.53,
+   "moyenne": 4328.81,
+   "max": 4352.32,
+   "ecart_max_min_pct": 0.9,
+   "temps_moyen_s": 9.4
+  },
+  {
+   "n": 20,
+   "K": 12,
+   "min": 5505.06,
+   "moyenne": 5534.87,
+   "max": 5567.01,
+   "ecart_max_min_pct": 1.13,
+   "temps_moyen_s": 18.5
+  }
+ ],
+ "B": [
+  {
+   "n": 6,
+   "instance": 1,
+   "K": 5,
+   "alns": 2103.94,
+   "exact": 2103.94,
+   "statut_exact": "OPTIMAL",
+   "t_exact_s": 1.3,
+   "t_alns_s": 0.7,
+   "ecart_pct": 0.0
+  },
+  {
+   "n": 6,
+   "instance": 2,
+   "K": 4,
+   "alns": 2044.55,
+   "exact": 2044.55,
+   "statut_exact": "OPTIMAL",
+   "t_exact_s": 0.5,
+   "t_alns_s": 0.3,
+   "ecart_pct": 0.0
+  },
+  {
+   "n": 6,
+   "instance": 3,
+   "K": 5,
+   "alns": 2488.32,
+   "exact": 2417.22,
+   "statut_exact": "OPTIMAL",
+   "t_exact_s": 0.6,
+   "t_alns_s": 1.2,
+   "ecart_pct": 2.94
+  },
+  {
+   "n": 6,
+   "instance": 4,
+   "K": 4,
+   "alns": 2009.98,
+   "exact": 2009.98,
+   "statut_exact": "OPTIMAL",
+   "t_exact_s": 0.3,
+   "t_alns_s": 0.3,
+   "ecart_pct": 0.0
+  },
+  {
+   "n": 6,
+   "instance": 5,
+   "K": 3,
+   "alns": 1817.91,
+   "exact": 1817.91,
+   "statut_exact": "OPTIMAL",
+   "t_exact_s": 0.4,
+   "t_alns_s": 0.4,
+   "ecart_pct": 0.0
+  },
+  {
+   "n": 8,
+   "instance": 1,
+   "K": 5,
+   "alns": 2308.47,
+   "exact": 2308.47,
+   "statut_exact": "OPTIMAL",
+   "t_exact_s": 3.4,
+   "t_alns_s": 0.7,
+   "ecart_pct": -0.0
+  },
+  {
+   "n": 8,
+   "instance": 2,
+   "K": 6,
+   "alns": 2696.91,
+   "exact": 2689.16,
+   "statut_exact": "OPTIMAL",
+   "t_exact_s": 1.4,
+   "t_alns_s": 0.8,
+   "ecart_pct": 0.29
+  },
+  {
+   "n": 8,
+   "instance": 3,
+   "K": 5,
+   "alns": 2551.79,
+   "exact": 2551.79,
+   "statut_exact": "OPTIMAL",
+   "t_exact_s": 22.8,
+   "t_alns_s": 0.9,
+   "ecart_pct": 0.0
+  },
+  {
+   "n": 8,
+   "instance": 4,
+   "K": 6,
+   "alns": 2947.64,
+   "exact": 2947.64,
+   "statut_exact": "OPTIMAL",
+   "t_exact_s": 1.3,
+   "t_alns_s": 0.7,
+   "ecart_pct": -0.0
+  },
+  {
+   "n": 8,
+   "instance": 5,
+   "K": 5,
+   "alns": 2413.37,
+   "exact": 2413.37,
+   "statut_exact": "FEASIBLE",
+   "t_exact_s": 45.1,
+   "t_alns_s": 0.8,
+   "ecart_pct": -0.0
+  },
+  {
+   "n": 10,
+   "instance": 1,
+   "K": 8,
+   "alns": 3236.56,
+   "exact": 3236.56,
+   "statut_exact": "OPTIMAL",
+   "t_exact_s": 27.0,
+   "t_alns_s": 1.9,
+   "ecart_pct": 0.0
+  },
+  {
+   "n": 10,
+   "instance": 2,
+   "K": 7,
+   "alns": 3337.68,
+   "exact": 3337.68,
+   "statut_exact": "OPTIMAL",
+   "t_exact_s": 4.8,
+   "t_alns_s": 1.8,
+   "ecart_pct": -0.0
+  },
+  {
+   "n": 10,
+   "instance": 3,
+   "K": 9,
+   "alns": 4152.58,
+   "exact": 4152.58,
+   "statut_exact": "OPTIMAL",
+   "t_exact_s": 2.1,
+   "t_alns_s": 5.0,
+   "ecart_pct": -0.0
+  },
+  {
+   "n": 10,
+   "instance": 4,
+   "K": 7,
+   "alns": 3394.67,
+   "exact": 3360.85,
+   "statut_exact": "FEASIBLE",
+   "t_exact_s": 45.2,
+   "t_alns_s": 4.4,
+   "ecart_pct": 1.01
+  },
+  {
+   "n": 10,
+   "instance": 5,
+   "K": 5,
+   "alns": 2727.45,
+   "exact": 2889.83,
+   "statut_exact": "FEASIBLE",
+   "t_exact_s": 45.1,
+   "t_alns_s": 1.6,
+   "ecart_pct": -5.62
+  }
+ ],
+ "C": [
+  {
+   "n": 12,
+   "instance": 1,
+   "K": 8,
+   "alns_seed1": 3791.05,
+   "alns_best5": 3791.05,
+   "exact": 3754.72,
+   "statut_exact": "FEASIBLE",
+   "t_exact_s": 90.2,
+   "ecart_seed1_pct": 0.97,
+   "ecart_best5_pct": 0.97
+  },
+  {
+   "n": 12,
+   "instance": 2,
+   "K": 9,
+   "alns_seed1": 4472.72,
+   "alns_best5": 4443.42,
+   "exact": 4431.29,
+   "statut_exact": "OPTIMAL",
+   "t_exact_s": 64.6,
+   "ecart_seed1_pct": 0.94,
+   "ecart_best5_pct": 0.27
+  },
+  {
+   "n": 12,
+   "instance": 3,
+   "K": 8,
+   "alns_seed1": 3982.39,
+   "alns_best5": 3982.39,
+   "exact": 3982.39,
+   "statut_exact": "OPTIMAL",
+   "t_exact_s": 13.3,
+   "ecart_seed1_pct": 0.0,
+   "ecart_best5_pct": -0.0
+  },
+  {
+   "n": 12,
+   "instance": 4,
+   "K": 10,
+   "alns_seed1": 4835.21,
+   "alns_best5": 4835.21,
+   "exact": 4835.21,
+   "statut_exact": "OPTIMAL",
+   "t_exact_s": 10.0,
+   "ecart_seed1_pct": -0.0,
+   "ecart_best5_pct": -0.0
+  },
+  {
+   "n": 12,
+   "instance": 5,
+   "K": 8,
+   "alns_seed1": 3702.56,
+   "alns_best5": 3702.56,
+   "exact": 3702.56,
+   "statut_exact": "FEASIBLE",
+   "t_exact_s": 90.2,
+   "ecart_seed1_pct": 0.0,
+   "ecart_best5_pct": 0.0
+  }
+ ],
+ "D": [
+  {
+   "n": 15,
+   "instance": 1,
+   "K": 9,
+   "min": 4363.16,
+   "moyenne": 4474.8,
+   "max": 4578.01,
+   "ecart_max_min_pct": 4.92,
+   "temps_moyen_s": 7.1
+  },
+  {
+   "n": 15,
+   "instance": 2,
+   "K": 10,
+   "min": 5263.85,
+   "moyenne": 5263.85,
+   "max": 5263.85,
+   "ecart_max_min_pct": 0.0,
+   "temps_moyen_s": 9.2
+  },
+  {
+   "n": 15,
+   "instance": 3,
+   "K": 10,
+   "min": 4967.8,
+   "moyenne": 4986.47,
+   "max": 4994.05,
+   "ecart_max_min_pct": 0.53,
+   "temps_moyen_s": 11.2
+  },
+  {
+   "n": 15,
+   "instance": 4,
+   "K": 9,
+   "min": 4749.02,
+   "moyenne": 4749.02,
+   "max": 4749.02,
+   "ecart_max_min_pct": 0.0,
+   "temps_moyen_s": 17.3
+  },
+  {
+   "n": 15,
+   "instance": 5,
+   "K": 9,
+   "min": 4451.29,
+   "moyenne": 4482.82,
+   "max": 4507.16,
+   "ecart_max_min_pct": 1.26,
+   "temps_moyen_s": 7.9
+  },
+  {
+   "n": 20,
+   "instance": 1,
+   "K": 14,
+   "min": 6771.62,
+   "moyenne": 6784.74,
+   "max": 6808.07,
+   "ecart_max_min_pct": 0.54,
+   "temps_moyen_s": 23.0
+  },
+  {
+   "n": 20,
+   "instance": 2,
+   "K": 12,
+   "min": 6131.85,
+   "moyenne": 6219.05,
+   "max": 6328.92,
+   "ecart_max_min_pct": 3.21,
+   "temps_moyen_s": 17.6
+  },
+  {
+   "n": 20,
+   "instance": 3,
+   "K": 11,
+   "min": 5635.8,
+   "moyenne": 5668.64,
+   "max": 5739.01,
+   "ecart_max_min_pct": 1.83,
+   "temps_moyen_s": 17.3
+  },
+  {
+   "n": 20,
+   "instance": 4,
+   "K": 11,
+   "min": 5460.18,
+   "moyenne": 5487.71,
+   "max": 5514.3,
+   "ecart_max_min_pct": 0.99,
+   "temps_moyen_s": 15.1
+  },
+  {
+   "n": 20,
+   "instance": 5,
+   "K": 11,
+   "min": 5435.25,
+   "moyenne": 5526.41,
+   "max": 5604.29,
+   "ecart_max_min_pct": 3.11,
+   "temps_moyen_s": 31.8
+  }
+ ]
+}

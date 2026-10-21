@@ -1,0 +1,4 @@
+ALNS  : faisable, coût 1101.05, 0.5 s
+Exact : optimal, coût 1101.05, 0.3 s
+Exemple chargé : 8 demandes
+RÉSULTAT : OK
